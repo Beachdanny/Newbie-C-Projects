@@ -1,0 +1,157 @@
+/*
+*----------------------------------------------*
+|  Enigma Encrypter & Decrypter source code    |
+|          Written by BeachDanny               |
+|  © 2014 distributed under the WTFPL license  |
+|     Use it with care, written as a simple    |
+|  starting project while learning to program  |
+*----------------------------------------------*
+*/
+
+#include <stdio.h>
+#include <string.h>
+
+
+int main(int argc[], const char* argv[])
+{
+	//int secret = atoi(argv[1]); // getting the secret code from the command line, for user friendlyness it's removed and instead included as a menu option. 
+	int secret = 0;
+	char message[255];
+	char enigma[2];
+	int option;
+	int enigmaInt = atoi(&enigma[2]);
+	int optionInt = atoi(&option);
+	char debugger[1]; // debugging the enter keystroke in the input buffer from scanf @ line 25 & 69
+	
+	char enigmaD[2];
+	int enigmaIntD = atoi(&enigmaD[2]);
+
+	
+	printf("*----------------------------------------------*\n");
+	printf("|  Welcome to the Enigma Encrypter & Decrypter |\n");
+	printf("|          Written by BeachDanny               |\n");
+	printf("|  © 2014 distributed under the WTFPL license  |\n");
+	printf("*----------------------------------------------*\n");
+	menu:
+	putchar('\n');
+	printf("            Menu Options:                \n");
+	printf("            1). Encrypt message          \n");
+	printf("            2). Decrypt message          \n");
+	printf("            3). Enter secret code        \n");
+	printf("            4). Readme (Howto)           \n");
+    printf("            5). Quit                     \n");
+	printf("            I choose option (1-5): ");
+	scanf("%d", &option);
+	
+	if(option == 1) 
+	{
+		gets(debugger);
+		printf("Please enter your message for encryption (Max 255 characters): \n");
+		gets(message);
+		putchar('\n');
+		int messageLength = strlen(message);
+		printf("Received %i characters, stored for encryption..\n", messageLength);
+				while((enigmaInt >= 100) || (enigmaInt <= 0) || (enigma == NULL)) 
+				{
+					printf("Enter your Enigma number (1-99): ");  
+					scanf("%d", &enigmaInt);		
+				}
+				int secretCode = 0;
+				printf("Enter your secret code, numbers only!: ");  
+				scanf("%d", &secretCode);		 
+				putchar('\n');
+				printf("Remember your Enigma number and Secret number: %i & %i !!", enigmaInt, secretCode);
+				putchar('\n');
+				putchar('\n');
+				printf("First: Copy the message\nSecondly: Send the Enigma #, Secret # & message to the receiver!\nGoal: Simple encrypted communication :)\n\n");
+				printf("*************ENCRYPTED MESSAGE*************\n");
+				int i;
+				for(i = 0; i < messageLength; i++)
+				{
+					printf("%c", message[i] + enigmaInt + secretCode);
+				}
+				printf("\n*********END OF ENCRYPTED MESSAGE**********\n");
+				putchar('\n');
+				goto menu;
+	}
+	else if(option == 2) 
+	{
+		gets(debugger);
+		printf("Please enter the message the you received: \n");
+		gets(message);
+		putchar('\n');
+		int messageLength = strlen(message);
+		printf("Received %i characters, stored for decryption..\n", messageLength);
+				while((enigmaIntD >= 100) || (enigmaIntD <= 0) || (enigmaD == NULL)) 
+				{
+					printf("Enter the Enigma number that you received: ");  
+					scanf("%d", &enigmaIntD);		
+				} 
+				putchar('\n');
+				printf("*************DECRYPTED MESSAGE*************\n");
+				int i;
+				for(i = 0; i < messageLength; i++)
+				{
+					printf("%c", message[i] - enigmaIntD - secret);
+				}
+				printf("\n********END OF DECRYPTED MESSAGE*********\n");
+		putchar('\n');
+		goto menu;
+	}
+	else if(option == 3)
+	{ 
+		gets(debugger);
+		printf("Enter secret code for decryption: ");
+		scanf("%d", &secret);
+		gets(debugger);
+		goto menu;
+	}
+	else if(option == 4)
+	{ 
+		putchar('\n');
+		putchar('\n');
+		printf(".##.....##..#######..##......##....########..#######....\n");
+		printf(".##.....##.##.....##.##..##..##.......##....##.....##...\n");
+		printf(".##.....##.##.....##.##..##..##.......##....##.....##...\n");
+		printf(".#########.##.....##.##..##..##.......##....##.....##...\n");
+		printf(".##.....##.##.....##.##..##..##.......##....##.....##...\n");
+		printf(".##.....##.##.....##.##..##..##.......##....##.....##...\n");
+		printf(".##.....##..#######...###..###........##.....#######....\n");
+        putchar('\n');
+		putchar('\n');	
+		printf("+------------------------------+\n");
+		printf("| How to encrypt your message? |\n");
+		printf("+------------------------------+\n");
+		printf("Choose the option Encrypt message from the menu\n");
+		printf("Follow the instructions and REMEMBER the:\n");
+		printf("- Enigma number!\n");
+		printf("- Secret number!\n");;
+		printf("Now you will get your enrycpted message out of the program.\n");
+		printf("Copy this message and send it to the receiver together with\n");
+		printf("the Enigma & Secret number! You're done!\n");
+		printf("\n");
+		printf("+------------------------------+\n");
+		printf("| How to decrypt your message? |\n");
+		printf("+------------------------------+\n");
+		printf("First choose Enter secret code from the menu, you should have received it.\n");
+		printf("Enter your secret code, then choose Decrypt message from the menu.\n");
+		printf("Paste the encrypted message you got into the program and press enter!\n");
+		printf("Now enter the enigma number you received and your message will be decrypted!\n");
+		printf("\n");
+		printf("Have Fun!\n");
+		
+		goto menu;
+	}
+	else if(option == 5) { goto end; }
+	else 
+	{ 
+		goto menu; 
+	}
+	
+	end:	
+	putchar('\n');
+	printf("Thank you for using my Encrypter / Decrypter!");
+	putchar('\n');
+	return 0;
+
+}
